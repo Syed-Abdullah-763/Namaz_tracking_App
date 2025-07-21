@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <nav class="navbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+        <ul class="menu" id="menu">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <form id="prayerForm">
+            <label for="prayerDate" style="font-weight:600;">Select Date:</label>
+            <input type="date" id="prayerDate" name="prayerDate" required style="margin-bottom: 1.5rem; display:block; width:100%; max-width:250px;">
+            <div class="prayer-list">
+                <div class="prayer-item">
+                    <span class="prayer-name">Fajr</span>
+                    <button type="button" class="prayer-done">Done</button>
+                    <button type="button" class="prayer-miss">Miss</button>
+                </div>
+                <div class="prayer-item">
+                    <span class="prayer-name">Dhuhr</span>
+                    <button type="button" class="prayer-done">Done</button>
+                    <button type="button" class="prayer-miss">Miss</button>
+                </div>
+                <div class="prayer-item">
+                    <span class="prayer-name">Asr</span>
+                    <button type="button" class="prayer-done">Done</button>
+                    <button type="button" class="prayer-miss">Miss</button>
+                </div>
+                <div class="prayer-item">
+                    <span class="prayer-name">Maghrib</span>
+                    <button type="button" class="prayer-done">Done</button>
+                    <button type="button" class="prayer-miss">Miss</button>
+                </div>
+                <div class="prayer-item">
+                    <span class="prayer-name">Isha</span>
+                    <button type="button" class="prayer-done">Done</button>
+                    <button type="button" class="prayer-miss">Miss</button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <script type="module" src="home.js"></script>
+</body>
+</html>

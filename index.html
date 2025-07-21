@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LogIn</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="animated-bg">
+      <div class="bg-circle bg-circle1"></div>
+      <div class="bg-circle bg-circle2"></div>
+      <div class="bg-circle bg-circle3"></div>
+    </div>
+    <main>
+      <h1>LogIn</h1>
+
+      <div class="links">
+        <a href="index.html" class="login active"><span>LogIn</span></a>
+        <a href="./signUp/signup.html" class="signUp"><span>signUp</span></a>
+      </div>
+      <div class="form">
+        <span id="error"></span>
+        <input type="text" placeholder="Email Adress" id="email"/>
+        <input type="password" placeholder="Password" id="password"/>
+        <a href="./signUp/signup.html">Create new account</a>
+        <button id="loginHandlerBtn">LogIn</button>
+      </div>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>

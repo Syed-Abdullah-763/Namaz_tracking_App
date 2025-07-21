@@ -1,0 +1,256 @@
+:root {
+    --navbar-bg: #fff;
+    --navbar-shadow: 0 2px 16px rgba(44, 62, 80, 0.08);
+    --navbar-radius: 18px;
+    --menu-link: #2d3a4a;
+    --menu-link-bg: #f3f8ff;
+    --menu-link-border: #e0eafc;
+    --menu-link-hover: #4f8cff;
+    --menu-link-active: #4f8cff;
+    --menu-link-active-color: #fff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--navbar-bg);
+    box-shadow: var(--navbar-shadow);
+    min-height: 60px;
+    border-radius: 0 0 var(--navbar-radius) var(--navbar-radius);
+}
+
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--menu-link-bg);
+    color: var(--menu-link);
+    border: 1.5px solid var(--menu-link-border);
+    font-size: 2rem;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+    cursor: pointer;
+    margin: 0.5rem 1rem 0.5rem 0.5rem;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.menu-toggle:focus,
+.menu-toggle:hover {
+    background: var(--menu-link-hover);
+    color: #fff;
+    border-color: var(--menu-link-hover);
+    outline: none;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    background: transparent;
+    border-radius: var(--navbar-radius);
+    padding: 0.5rem 2rem;
+    margin: 0.5rem 0;
+    list-style: none;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.menu li {
+    margin: 0;
+}
+.menu a {
+    color: var(--menu-link);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 8px 22px;
+    border-radius: 999px;
+    background: var(--menu-link-bg);
+    border: 1.5px solid var(--menu-link-border);
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    display: block;
+}
+.menu a:hover {
+    background: var(--menu-link-hover);
+    color: #fff;
+    border-color: var(--menu-link-hover);
+}
+.menu a.active {
+    background: var(--menu-link-active);
+    color: var(--menu-link-active-color);
+    border-color: var(--menu-link-active);
+}
+
+@media (max-width: 900px) {
+    .menu {
+        padding: 0.5rem 1rem;
+        gap: 0.5rem;
+    }
+    .menu a {
+        font-size: 1rem;
+        padding: 7px 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        justify-content: flex-end;
+        min-height: 54px;
+        border-radius: 0 0 var(--navbar-radius) var(--navbar-radius);
+    }
+    .menu-toggle {
+        display: flex;
+    }
+    .menu {
+        position: fixed;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%) translateY(100%);
+        flex-direction: column;
+        width: 96vw;
+        max-width: 420px;
+        border-radius: 18px 18px 0 0;
+        box-shadow: 0 -8px 32px 0 rgba(44, 62, 80, 0.12);
+        padding: 1.2rem 1rem 2rem 1rem;
+        background: var(--navbar-bg);
+        transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+        z-index: 2000;
+        gap: 0.5rem;
+    }
+    .menu.open {
+        transform: translateX(-50%) translateY(0);
+    }
+    .menu li {
+        margin: 0.25rem 0;
+    }
+}
+
+@media (min-width: 601px) {
+    .menu-toggle {
+        display: none;
+    }
+    .menu {
+        position: static;
+        transform: none;
+        width: auto;
+        max-width: none;
+        border-radius: var(--navbar-radius);
+        box-shadow: none;
+        flex-direction: row;
+        padding: 0.5rem 2rem;
+        gap: 1.2rem;
+    }
+}
+
+.prayer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 10px;
+}
+.prayer-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3f8ff;
+    border: 1.5px solid #e0eafc;
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
+    margin-bottom: 0.5rem;
+    gap: 12px;
+}
+.prayer-name {
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: #2d3a4a;
+    flex: 1;
+}
+.prayer-done, .prayer-miss {
+    border: none;
+    outline: none;
+    border-radius: 999px;
+    padding: 7px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.prayer-done {
+    background: #fff;
+    color: #4f8cff;
+    border: 1.5px solid #4f8cff;
+}
+.prayer-done:hover, .prayer-done:focus {
+    background: #4f8cff;
+    color: #fff;
+    border-color: #4f8cff;
+}
+.prayer-miss {
+    background: #fff;
+    color: #e74c3c;
+    border: 1.5px solid #e74c3c;
+}
+.prayer-miss:hover, .prayer-miss:focus {
+    background: #e74c3c;
+    color: #fff;
+}
+#prayerForm {
+    max-width: 400px;
+    margin: 90px auto 0 auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+    padding: 32px 24px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+#prayerDate {
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1.5px solid #e0eafc;
+    padding: 8px 12px;
+    background: #f7fbff;
+    color: #2d3a4a;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    width: 100%;
+    max-width: 250px;
+    box-sizing: border-box;
+}
+@media (max-width: 600px) {
+    #prayerForm {
+        max-width: 80vw;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 18px 6px 14px 6px;
+    }
+    .prayer-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 10px;
+    }
+    .prayer-done, .prayer-miss {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 4px;
+    }
+}
