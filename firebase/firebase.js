@@ -42,7 +42,6 @@ export {
   db,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  getFirestore,
   collection,
   addDoc,
   getDocs,

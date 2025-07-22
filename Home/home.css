@@ -200,12 +200,21 @@ body {
     color: #fff;
     border-color: #4f8cff;
 }
+.done {
+    background: #4f8cff;
+    color: #fff;
+    border-color: #4f8cff;
+}
 .prayer-miss {
     background: #fff;
     color: #e74c3c;
     border: 1.5px solid #e74c3c;
 }
 .prayer-miss:hover, .prayer-miss:focus {
+    background: #e74c3c;
+    color: #fff;
+}
+.miss {
     background: #e74c3c;
     color: #fff;
 }

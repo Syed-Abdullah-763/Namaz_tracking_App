@@ -12,8 +12,8 @@ const routeCheck = () => {
 
 const loginHandler = async () => {
   try {
-    const email = document.querySelector("#email").value;
-    const password = document.querySelector("#password").value;
+    let email = document.querySelector("#email").value;
+    let password = document.querySelector("#password").value;
 
     const response = await signInWithEmailAndPassword(auth, email, password);
     localStorage.setItem("uid", response.user.uid);
