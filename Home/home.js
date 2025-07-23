@@ -44,7 +44,6 @@ const fetcData = async () => {
 
     const namazData = await getDoc(doc(db, "namazHistory", uid));
     const namazHistory = namazData.data();
-    todaysNamaz = namazHistory[todaysDate];
 
     if (!namazHistory[todaysDate]) {
       createNamazData();
@@ -96,6 +95,53 @@ const createNamazData = async () => {
   }
 };
 
+const prayerDate = document.querySelector("#prayerDate");
+const calenderHandler = async () => {
+  try {
+    let dateSelected = transformDateToDMY(prayerDate.value);
+    const uid = localStorage.getItem("uid");
+
+    if (!dateSelected) {
+      return;
+    }
+
+    const createDate = new Date(prayerDate.value);
+    const date = formatDate(createDate);
+
+    const namazData = await getDoc(doc(db, "namazHistory", uid));
+    const namazHistory = namazData.data();
+
+    clearUi(dateSelected);
+
+    if (namazHistory[dateSelected]) {
+      todaysNamaz = namazHistory[dateSelected];
+      renderUi(todaysNamaz);
+
+      return
+    } 
+
+    const namazObj = {
+        fajar: "pending",
+        zohar: "pending",
+        asar: "pending",
+        maghrib: "pending",
+        isha: "pending",
+      };
+
+      await updateDoc(doc(db, "namazHistory", uid), {
+        ...namazHistory,
+        [dateSelected]: namazObj,
+      });
+
+      todaysNamaz = namazObj;
+      renderUi(todaysNamaz);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 const formatDate = (date) => {
   const month = String(date.getMonth() + 1).padStart(2, "0"); // Ensure two digits
   const day = String(date.getDate()).padStart(2, "0"); // Ensure two digits
@@ -128,13 +174,10 @@ const updateUi = async (btn) => {
 
   try {
     const uid = localStorage.getItem("uid");
-    const date = new Date();
-    const todaysDate = `${date.getDate()}-${
-      date.getMonth() + 1
-    }-${date.getFullYear()}`;
+    let dateSelected = transformDateToDMY(prayerDate.value);
 
     await updateDoc(doc(db, "namazHistory", uid), {
-      [todaysDate]: todaysNamaz,
+      [dateSelected]: todaysNamaz,
     });
   } catch (error) {
     console.log(error.message);
@@ -169,12 +212,34 @@ const renderUi = (todaysNamaz) => {
   });
 };
 
-const prayerDate = document.querySelector("#prayerDate");
+const clearUi = (dateSelected) => {
+  const prayerItems = document.querySelectorAll(".prayer-item");
 
-const calenderHandler = () => {
-  const date = transformDateToDMY(prayerDate.value);
-  console.log(date);
-  return date;
+  prayerItems.forEach((item) => {
+    const doneButton = item.querySelector(".prayer-done");
+    const missButton = item.querySelector(".prayer-miss");
+
+    // Reset buttons and remove classes
+    doneButton.classList.remove("done");
+    missButton.classList.remove("miss");
+    doneButton.disabled = false;
+    missButton.disabled = false;
+  });
+
+  // Update UI for the selected date
+  updateForCustomDate(dateSelected);
+};
+
+const updateForCustomDate = async (dateSelected) => {
+  try {
+    const uid = localStorage.getItem("uid");
+    const namazData = await getDoc(doc(db, "namazHistory", uid));
+    const namazHistory = namazData.data();
+    todaysNamaz = namazHistory[dateSelected];
+    renderUi(todaysNamaz);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const setYearRestriction = async () => {
@@ -182,18 +247,23 @@ const setYearRestriction = async () => {
     const uid = localStorage.getItem("uid");
     const response = await getDoc(doc(db, "users", uid));
     const user = response.data();
-    
+
     // Assuming user.date is in "year-month-day" format
-    const formatDate = transformDateToDMY(user.date)
+    const formatDate = transformDateToDMY(user.date);
     const userDate = new Date(formatDate);
+
+    // Use UTC to ensure consistency across time zones
     const today = new Date();
+    const todayUTC = new Date(
+      Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())
+    );
 
     // Format the dates to "YYYY-MM-DD" for the input attributes
     const minDate = userDate.toISOString().split("T")[0];
-    const maxDate = today.toISOString().split("T")[0];
+    const maxDate = todayUTC.toISOString().split("T")[0]; // Ensure this is today's date in UTC
 
     prayerDate.setAttribute("min", minDate);
-    prayerDate.setAttribute("max", maxDate);
+    prayerDate.setAttribute("max", maxDate); // Set max to today's date
   } catch (error) {
     console.log(error.message);
   }
@@ -214,8 +284,8 @@ const transformDateToDMY = (dateString) => {
   return `${parseInt(day)}-${parseInt(month)}-${year}`;
 };
 
-const debouncedCalenderHandler = debounce(calenderHandler, 1000);
-prayerDate.addEventListener("change", debouncedCalenderHandler);
+// const debouncedCalenderHandler = debounce(calenderHandler, 1000);
+prayerDate.addEventListener("change", calenderHandler);
 window.addEventListener("load", () => {
   routCheck();
   fetcData();
