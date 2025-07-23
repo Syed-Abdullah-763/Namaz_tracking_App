@@ -101,7 +101,16 @@ const calenderHandler = async () => {
     let dateSelected = transformDateToDMY(prayerDate.value);
     const uid = localStorage.getItem("uid");
 
-    if (!dateSelected) {
+    if (!prayerDate.value) {
+      return;
+    }
+
+    const enteredDate = new Date(prayerDate.value);
+    const minDate = new Date(prayerDate.getAttribute("min"));
+    const maxDate = new Date(prayerDate.getAttribute("max"));
+
+    if (enteredDate < minDate || enteredDate > maxDate) {
+      alert("Please select a date between your login date and today's date.");
       return;
     }
 
@@ -284,8 +293,8 @@ const transformDateToDMY = (dateString) => {
   return `${parseInt(day)}-${parseInt(month)}-${year}`;
 };
 
-// const debouncedCalenderHandler = debounce(calenderHandler, 1000);
-prayerDate.addEventListener("change", calenderHandler);
+const debouncedCalenderHandler = debounce(calenderHandler, 1000);
+prayerDate.addEventListener("change", debouncedCalenderHandler);
 window.addEventListener("load", () => {
   routCheck();
   fetcData();
