@@ -16,6 +16,7 @@ body {
     background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
 }
 
+/* Navbar */
 .navbar {
     position: fixed;
     top: 0;
@@ -33,9 +34,11 @@ body {
 
 nav .name {
     color: #4f8cff;
-    margin-right: 30px;
+    margin-right: 10px;
+    font-size: 24px;
 }
 
+/* Menu Toggle Button */
 .menu-toggle {
     display: flex;
     align-items: center;
@@ -60,6 +63,7 @@ nav .name {
     outline: none;
 }
 
+/* Menu */
 .menu {
     display: flex;
     flex-direction: row;
@@ -99,6 +103,7 @@ nav .name {
     border-color: var(--menu-link-active);
 }
 
+/* Media Queries */
 @media (max-width: 900px) {
     .menu {
         padding: 0.5rem 1rem;
@@ -160,111 +165,59 @@ nav .name {
     }
 }
 
-.prayer-list {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-top: 10px;
+/* ✅ Enhanced Logout Card */
+.logout-card {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  max-width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 100px auto 1rem; /* 👈 Add top margin to avoid navbar overlap */
+  text-align: center;
 }
-.prayer-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f3f8ff;
-    border: 1.5px solid #e0eafc;
-    border-radius: 12px;
-    padding: 12px 18px;
-    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
-    margin-bottom: 0.5rem;
-    gap: 12px;
+
+.logout-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
 }
-.prayer-name {
-    font-size: 1.08rem;
-    font-weight: 600;
-    color: #2d3a4a;
-    flex: 1;
+
+.logout-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 600;
 }
-.prayer-done, .prayer-miss {
-    border: none;
-    outline: none;
-    border-radius: 999px;
-    padding: 7px 20px;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-left: 8px;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+
+.logout-card p {
+  font-size: 0.875rem;
+  color: #7f8c8d;
+  margin: 0.5rem 0 1.2rem;
+  word-break: break-all;
 }
-.prayer-done {
-    background: #fff;
-    color: #4f8cff;
-    border: 1.5px solid #4f8cff;
+
+.logout-card button {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s;
+  box-shadow: 0 4px 14px rgba(255, 77, 77, 0.4);
 }
-.prayer-done:hover, .prayer-done:focus {
-    background: #4f8cff;
-    color: #fff;
-    border-color: #4f8cff;
+
+.logout-card button:hover {
+  background-color: #e60000;
+  transform: translateY(-2px);
 }
-.done {
-    background: #4f8cff;
-    color: #fff;
-    border-color: #4f8cff;
+
+@media (max-width: 400px) {
+    .logout-card {
+  width: 230px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 100px auto 1rem; /* 👈 Add top margin to avoid navbar overlap */
+  text-align: center;
 }
-.prayer-miss {
-    background: #fff;
-    color: #e74c3c;
-    border: 1.5px solid #e74c3c;
-}
-.prayer-miss:hover, .prayer-miss:focus {
-    background: #e74c3c;
-    color: #fff;
-}
-.miss {
-    background: #e74c3c;
-    color: #fff;
-}
-#prayerForm {
-    max-width: 400px;
-    margin: 90px auto 0 auto;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
-    padding: 32px 24px 24px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-}
-#prayerDate {
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1.5px solid #e0eafc;
-    padding: 8px 12px;
-    background: #f7fbff;
-    color: #2d3a4a;
-    margin-bottom: 1.5rem;
-    margin-top: 0.5rem;
-    width: 100%;
-    max-width: 250px;
-    box-sizing: border-box;
-}
-@media (max-width: 600px) {
-    #prayerForm {
-        max-width: 80vw;
-        width: auto;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 18px 6px 14px 6px;
-    }
-    .prayer-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        padding: 10px 10px;
-    }
-    .prayer-done, .prayer-miss {
-        width: 100%;
-        margin-left: 0;
-        margin-bottom: 4px;
-    }
 }
